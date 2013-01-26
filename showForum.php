@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['id'])) {
-    $xml = simplexml_load_file('forums.xml')->forums->forum;
+    $xml = simplexml_load_file('forums.xml')->forum;
     foreach ($xml as $forum) {
         if ($forum-> id == $_GET['id']) {
             $name = $forum -> name;
