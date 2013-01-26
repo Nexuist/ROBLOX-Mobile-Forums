@@ -11,15 +11,16 @@ else
     libxml_use_internal_errors(true);
     //Prepare file and DOM
     $file = fopen('../forums.html','w');
-    $layout = fopen('../forums.xml','w');
-    fwrite($layout, "<?xml version='1.0' encoding='UTF-8'?><forums>");
     $dataToWrite = "";
-    $xml = "";
     $page = new DOMDocument();
     $page -> preserveWhiteSpace = false;
     $page -> loadHTML($html);
     //Getting titles
     $anchor = $page -> getElementsByTagName('a');
+
+
+    $xml = new SimpleXMLElement('<forums/>');
+    $group = $xml;
 
     foreach($anchor as $title) {
         $href = $title->getAttribute('href');
@@ -27,27 +28,35 @@ else
         if (strlen($href) >= 16 and substr($href,0,16) == "/Forum/ShowForum") {
             // Forum
             if (strlen($href) >= 31 and substr($href,16,5) == ".aspx") {
-                $url = "forum-" . substr($href,30);
-                $desc = $title->parentNode->getElementsByTagName('span')->item(0)->nodeValue;
 
-                $xml .= "\n\t<forum id=\"" . substr($href,30) . "\">"
-                      . "\n\t\t<name>" . str_replace("&","&amp;",$title->nodeValue) . "</name>"
-                      . "\n\t\t<desc>" . str_replace("&","&amp;",$desc) . "</desc>"
-                      . "\n\t</forum>";
+                $url = "forum-" . substr($href,30);
+                $desc = trim($title->parentNode->getElementsByTagName('span')->item(0)->nodeValue);
+
+                $xml_forum = $group->addChild('forum');
+                $xml_forum->addAttribute('id', substr($href,30));
+                $xml_forum->addChild('name', $title->nodeValue);
+                $xml_forum->addChild('desc', $desc);
+
                 $dataToWrite .= "<li>" . "<a href = '" . $url . "'><h3>" . $title->nodeValue . "</h3>"
                               . "<p>" . $desc . "</p></a></li>\n";
             }
             // Group
             if (strlen($href) >= 41 and substr($href,16,5) == "Group") {
-                $xml = $xml . "\n<forum>\n<name>" . str_replace("&","&amp;",$title->nodeValue) . "</name>\n<group>true</group>\n</forum>";
+                $xml_group = $xml->addChild('group');
+                $xml_group->addChild('name', $title->nodeValue);
+                $group = $xml_group;
+
                 $dataToWrite = $dataToWrite . "<li data-role = 'list-divider'>" .  $title->nodeValue . "</li>\n";
             }
         }
     }
+    // http://stackoverflow.com/a/1191188/102441
+    $dom = dom_import_simplexml($xml)->ownerDocument;
+    $dom->formatOutput = true;
+    $dom->save('../forums.xml');
+
     //Write contents to file
     fwrite($file,$dataToWrite);
-    fwrite($layout,$xml . "\n</forums>");
     fclose($file);
-    fclose($layout);
 }
 ?>
