@@ -1,14 +1,15 @@
 <?php
-if (isset($_GET['id'])) {
-    $xml = simplexml_load_file('forums.xml')->forum;
-    foreach ($xml as $forum) {
-        if ($forum-> id == $_GET['id']) {
-            $name = $forum -> name;
-            $desc = $forum -> desc;
-        }
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $id = (int) $_GET['id'];
+
+    $forum = simplexml_load_file('forums.xml')->xpath("//forum[@id='$id']");
+    if ($forum) {
+        $name = $forum[0]->name;
+        $desc = $forum[0]->desc;
     }
+
     if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-        $pageNum = $_GET['page'];   
+        $pageNum = $_GET['page'];
     }
     else {
         $pageNum = 1;
@@ -31,10 +32,7 @@ if (isset($_GET['id'])) {
     <!--/Header-->
     <!--Body-->
 	<div data-role="content">
-        <?php
-        $id = $_GET['id'];
-        if ($name != "") {
-        ?>
+        <?php if ($name != "") {?>
         <!--Threads-->
 		<ul data-role="listview">
             <!--Intro -->

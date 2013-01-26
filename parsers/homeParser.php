@@ -30,10 +30,9 @@ else
                 $url = "showForum.php?id=" . substr($href,30);
                 $desc = $title->parentNode->getElementsByTagName('span')->item(0)->nodeValue;
 
-                $xml .= "\n\t<forum>"
+                $xml .= "\n\t<forum id=\"" . substr($href,30) . "\">"
                       . "\n\t\t<name>" . str_replace("&","&amp;",$title->nodeValue) . "</name>"
                       . "\n\t\t<desc>" . str_replace("&","&amp;",$desc) . "</desc>"
-                      . "\n\t\t<id>" . substr($href,30) . "</id>"
                       . "\n\t</forum>";
                 $dataToWrite .= "<li>" . "<a href = '" . $url . "'><h3>" . $title->nodeValue . "</h3>"
                               . "<p>" . $desc . "</p></a></li>\n";
