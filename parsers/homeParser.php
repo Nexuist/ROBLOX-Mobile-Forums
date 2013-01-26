@@ -27,7 +27,7 @@ else
         if (strlen($href) >= 16 and substr($href,0,16) == "/Forum/ShowForum") {
             // Forum
             if (strlen($href) >= 31 and substr($href,16,5) == ".aspx") {
-                $url = "showForum.php?id=" . substr($href,30);
+                $url = "forum-" . substr($href,30);
                 $desc = $title->parentNode->getElementsByTagName('span')->item(0)->nodeValue;
 
                 $xml .= "\n\t<forum id=\"" . substr($href,30) . "\">"

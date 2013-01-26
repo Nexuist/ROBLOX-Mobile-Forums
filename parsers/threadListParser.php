@@ -49,7 +49,7 @@ else
                 //Turn hyphens into 0s (helps clarity)
                 $replies = str_replace("-","0",$replies);
                 $views = str_replace("-","0",$views);
-                echo "<li $pinned><a href = 'showThread.php?id=$href'>"; // URL
+                echo "<li $pinned><a href = 'thread-$href'>"; // URL
                 echo "<h3 style = 'white-space: normal'>$title</h3>"; // Title
                 echo "<p><font color = '#2489CE'>$author</font> "; // Author
                 echo "<b>$replies</b> Replies <b>$views</b> Views <b>$lastPoster</b>"; // Replies, views, last poster
