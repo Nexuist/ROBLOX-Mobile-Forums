@@ -3,34 +3,47 @@
 require_once "includes/classes.php";
 
 // nodeValue strips out newlines, this function keeps HTML intact
-function innerXML($node) { 
-    $doc  = $node->ownerDocument; 
-    $frag = $doc->createDocumentFragment(); 
-    foreach ($node->childNodes as $child) { 
-        $frag->appendChild($child->cloneNode(TRUE)); 
-    } 
-    return $doc->saveXML($frag); 
-}  
-
-// Setup
-$html = @file_get_contents("http://www.roblox.com/Forum/ShowPost.aspx?PostID=$id&PageIndex=$pageNum");
-if ($html === false) {
-    echo "<li><h1>Error</h1><p>The page couldn't be found.</p></li>";
-    $errored = true; // Needed for paginationFooter to not error
-}
-else 
-{
-    libxml_use_internal_errors(true);
-    $page = new DOMDocument();
-    $page -> preserveWhiteSpace = false;
-    $page -> loadHTML($html);
-
-    $holder = $page->getElementById('ctl00_cphRoblox_PostView1_ctl00_PostList');
-    // Error if thread doesn't exist
-    if (!$holder) {
-        echo "<li><h3>Error</h3><p>An error occured while parsing this thread.</p></li>";
+function innerXML($node) {
+    $doc  = $node->ownerDocument;
+    $frag = $doc->createDocumentFragment();
+    foreach ($node->childNodes as $child) {
+        $frag->appendChild($child->cloneNode(TRUE));
     }
-    else {
+    return $doc->saveXML($frag);
+}
+
+class Thread extends EnhancedObject {
+    public $id;
+    public $pageNum;
+
+    public function getUrl() {
+        return "http://www.roblox.com/Forum/ShowPost.aspx?PostID={$this->id}&PageIndex={$this->pageNum}";
+    }
+
+    public function forEachPost($callback) {
+        global $errored, $page;
+        // Setup
+        $html = @file_get_contents($this->url);
+        if ($html === false) {
+            echo "<li><h1>Error</h1><p>The page couldn't be found.</p></li>";
+            $errored = true; // Needed for paginationFooter to not error
+            return;
+        }
+
+        libxml_use_internal_errors(true);
+        $page = new DOMDocument();
+        $page -> preserveWhiteSpace = false;
+        $page -> loadHTML($html);
+
+        $holder = $page->getElementById('ctl00_cphRoblox_PostView1_ctl00_PostList');
+
+        // Error if thread doesn't exist
+        if (!$holder) {
+            echo "<li><h3>Error</h3><p>An error occured while parsing this thread.</p></li>";
+            $errored = true; // Needed for paginationFooter to not error
+            return;
+        }
+
         $holder = $holder->childNodes;
         foreach($holder as $post) {
             if (($post->childNodes->length == 3) && ($post->getElementsByTagName('td')->length != 0)) {
@@ -75,8 +88,8 @@ else
                 $post->date = $postTitleSect->childNodes->item(3)->nodeValue;
                 $post->content = innerXML($postSect->childNodes->item(1));
 
-                // include our template to separate parsing from presentation
-                include "templates/post.php";
+                // send the post to the callback so that it can be rendered
+                $callback($post);
             }
         }
     }
