@@ -23,9 +23,10 @@ else {$pageNum = 1;}
     <!--/Header-->
     <!--Body-->
 	<div data-role="content">
-        <?php
-        echo "<a href = 'http://www.roblox.com/Forum/ShowPost.aspx?PostID=$id&PageIndex=$pageNum' target = '_blank' data-role = 'button'>Show Original</a><br>"; 
-        ?>
+        <a href='http://www.roblox.com/Forum/ShowPost.aspx?PostID=<?= $id ?>&amp;PageIndex=<?= $pageNum ?>' target='_blank' data-role='button'>
+            Show Original
+        </a>
+        <br>
 		<ul data-role="listview">
         <?php include('parsers/threadParser.php'); ?>
         </ul>
