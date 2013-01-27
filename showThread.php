@@ -58,6 +58,7 @@ $thread->pageNum = $pageNum;
                 <p style='word-break: break-all;'>
                     <?= $post->content ?><br><br>
                     <b>Posted</b> <?= $post->date ?>
+
                 </p>
             </li>
 <?php }) ?>
