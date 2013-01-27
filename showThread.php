@@ -11,8 +11,8 @@ else {$pageNum = 1;}
 $thread = new Thread();
 $thread->id = $id;
 $thread->pageNum = $pageNum;
-
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>

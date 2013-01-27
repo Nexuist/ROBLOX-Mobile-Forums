@@ -20,7 +20,8 @@
             <li>
                 <h1>Welcome</h1>
                 <p>Welcome to the mobile version of the ROBLOX forums! This website was developed
-                by the ROBLOX users <a href = "http://m.roblox.com/users/3576139" target = '_blank'>Techboy6601</a> and
+                by the ROBLOX users <a href = "http://m.roblox.com/users/3576139" target = '_blank'>Techboy6601</a>,
+				<a href = "http://m.roblox.com/users/921458" target = '_blank'>NXTBoy</a>, and
                 <a href = "http://m.roblox.com/users/25614845" target = '_blank'>Garnished</a>. Please note 
                 that it is still in development and not everything works. Enjoy!</p>
             </li>
