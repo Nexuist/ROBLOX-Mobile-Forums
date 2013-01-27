@@ -35,14 +35,14 @@ $thread->pageNum = $pageNum;
         </a>
         <br>
 		<ul data-role="listview">
-<?php $thread->forEachPost(function($post) { ?>
+		<?php $thread->forEachPost(function($post) { ?>
             <li data-role='list-divider'><?= $post->title ?></li>
             <li data-theme='d'>
                 <div data-role='collapsible' data-icon='delete' data-mini='true'>
                     <h5>
-<?php if($post->author->isMod): ?>
+			<?php if($post->author->isMod): ?>
                         <img src='includes/mod.gif' alt='MOD' />
-<?php endif ?>
+			<?php endif ?>
                         <font color='<?php if($post->author->online): ?>green<?php else: ?>red<?php endif ?>'>
                             <?= $post->author->name ?>
 
@@ -55,6 +55,7 @@ $thread->pageNum = $pageNum;
                         <a href='<?= $post->author->url ?>' target='_blank'>View Profile &#187;</a>
                     </p>
                 </div>
+				<br>
                 <p style='word-break: break-all;'>
                     <?= $post->content ?><br><br>
                     <b>Posted</b> <?= $post->date ?>
