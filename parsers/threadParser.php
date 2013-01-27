@@ -84,9 +84,10 @@ class Thread extends EnhancedObject {
                 //$authorGroup = $authorSect->childNodes->item(4)->getElementsByTagName('a')->item(0)->getAttribute('src');
                 // echo $authorGroup;
                 $postTitleSect = $postSect->childNodes->item(0)->childNodes->item(0);
-                $post->title = $postTitleSect->childNodes->item(0)->nodeValue;
-                $post->date = $postTitleSect->childNodes->item(3)->nodeValue;
-                $post->content = innerXML($postSect->childNodes->item(1));
+                $post->title = trim($postTitleSect->childNodes->item(0)->nodeValue);
+                $post->date = trim($postTitleSect->childNodes->item(3)->nodeValue);
+                $post->content = innerXML($postSect->childNodes->item(1)->childNodes->item(0)->childNodes->item(0));
+                // $post->content = current($postSect->childNodes->item(1)->xpath("//span[@class='normalTextSmall']"))->nodeValue;
 
                 // send the post to the callback so that it can be rendered
                 $callback($post);
