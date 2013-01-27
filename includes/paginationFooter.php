@@ -22,13 +22,13 @@ if ($totalPages > 1) {
                     // Back button
                     if ($pageNum != 1) {
                         $prevPage = $pageNum -1;
-                        echo "<a href='$pageName?id=$id&page=$prevPage' data-theme = 'e' data-role='button' data-icon = 'arrow-l' data-iconpos = 'notext'></a>";
+                        echo "<a href='?page=$prevPage' data-theme = 'e' data-role='button' data-icon = 'arrow-l' data-iconpos = 'notext'></a>";
                         }
                     echo "<a href = '#' data-role = 'button' data-theme = 'c'>$pageNum of $totalPages</a>";
                     // Forward button
                     if ($pageNum != $totalPages) {
                         $nxtPage = $pageNum +1;
-                        echo "<a href='$pageName?id=$id&page=$nxtPage' data-theme = 'e' data-role='button' data-icon = 'arrow-r' data-iconpos = 'notext'></a>";
+                        echo "<a href='?page=$nxtPage' data-theme = 'e' data-role='button' data-icon = 'arrow-r' data-iconpos = 'notext'></a>";
                         }
             ?>
             
