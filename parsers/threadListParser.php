@@ -17,7 +17,6 @@ else
         foreach($holder as $thread) {
             if ($thread->getElementsByTagName('td')->length > 1) {
                 // Resetting vars
-                $pinned = "";
                 $pages = 1;
                 $title = $thread->childNodes->item(1)->getElementsByTagName('a')->item(0)->nodeValue;
                 if ($thread->childNodes->item(1)->childNodes->length > 1) {
@@ -27,7 +26,7 @@ else
                     $pagesArray = explode(",",$titleWithPages);
                     $pages = substr($pagesArray[count($pagesArray)-1],0,-1);
                 }
-                $href = substr($thread->childNodes->item(1)->getElementsByTagName('a')->item(0)->getAttribute('href'),28);
+                $threadId = substr($thread->childNodes->item(1)->getElementsByTagName('a')->item(0)->getAttribute('href'),28);
                 $author = $thread->childNodes->item(2)->nodeValue;
                 $replies = $thread->childNodes->item(3)->nodeValue;
                 $views = $thread->childNodes->item(4)->nodeValue;
@@ -35,9 +34,10 @@ else
                 //Doing magic on the last column
                 $lastPostedSect = $thread->childNodes->item(5)->nodeValue;
                 if (substr($lastPostedSect,0,11) == "Pinned Post") {
-                    $pinned = "data-icon = 'star'";
+                    $pinned = true;
                 }
                 else {
+                    $pinned = false;
                     // This is needed to display last poster info correctly on threads from before today
                     if (substr($lastPostedSect,0,5) == "Today") {
                         $lastPoster = substr($lastPostedSect,19);
@@ -49,14 +49,8 @@ else
                 //Turn hyphens into 0s (helps clarity)
                 $replies = str_replace("-","0",$replies);
                 $views = str_replace("-","0",$views);
-                echo "<li $pinned><a href = 'thread-$href'>"; // URL
-                echo "<h3 style = 'white-space: normal'>$title</h3>"; // Title
-                echo "<p><font color = '#2489CE'>$author</font> "; // Author
-                echo "<b>$replies</b> Replies <b>$views</b> Views <b>$lastPoster</b>"; // Replies, views, last poster
-                if ($pages != 1) {
-                    echo "<div class = 'ui-li-count'>$pages</div>"; // Pages
-                }
-                echo "</p></a></li>"; // Close
+
+                include "templates/thread-link.php";
             }
         }
     }
