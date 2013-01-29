@@ -35,7 +35,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		</a>
 		<br>
 		<ul data-role="listview">
-		<?php $thread->forEachPost(function($post) { ?>
+		<?php 
+		// Loop through the posts
+		// And call the anonymous function created to handle rendering
+		$thread->forEachPost(function($post) { ?>
 			<li data-role='list-divider'><?= $post->title ?></li>
 			<li data-theme='d'>
 				<div data-role='collapsible' data-icon='delete' data-mini='true'>
