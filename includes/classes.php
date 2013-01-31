@@ -46,12 +46,19 @@ class User extends EnhancedObject {
 	public $postCount;
 	public $online;
 	public $isMod;
+	public $groupInfo; //this is an object based on the format of the json
 
 	public function getUrl() {
 		return "http://roblox.com/User.aspx?username=" . $this->name;
 	}
 	public function getImg() {
 		return "http://www.roblox.com/Thumbs/Avatar.ashx?x=100&y=100&Format=Png&username=" . $this->name;
+	}
+
+	public static function getGroupInfo($users) {
+		$url = "http://www.roblox.com/Groups/GetPrimaryGroupInfo.ashx?users=".implode(',', $users);
+		$data = file_get_contents($url);
+		return json_decode($data);
 	}
 }
 
