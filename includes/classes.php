@@ -44,7 +44,7 @@ class Group extends EnhancedObject {
 	public $name;
 	public $id;
 	public function getUrl() {
-		return "http://www.roblox.com/Groups/Group.aspx?gid=" . $this->name;
+		return "http://www.roblox.com/Groups/Group.aspx?gid=" . $this->id;
 	}
 }
 
