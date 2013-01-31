@@ -23,6 +23,8 @@ class Thread extends EnhancedObject {
 	public function loadPosts() {
 		global $errored, $page;
 		$posts = array();
+		$authors = array();
+
 		// Setup
 		$html = @file_get_contents($this->url);
 		if ($html === false) {
@@ -54,33 +56,42 @@ class Thread extends EnhancedObject {
 				$authorIcon = $authorSect->getElementsByTagName('img')->item(0)->getAttribute('src');
 
 				$post = new Post();
+				$authorName = trim(substr($authorSect->childNodes->item(0)->nodeValue,2));
 
-				// Assigning author values
-				$post->author = new User();
-				$post->author->name = trim(substr($authorSect->childNodes->item(0)->nodeValue,2));
-				$post->author->online = $authorIcon == "/Forum/skins/default/images/user_IsOnline.gif";
-				$post->author->joinDate = trim(substr($authorSect->childNodes->item(2)->nodeValue,8));
+				if(!isset($authors[$authorName])) {
+					// Assigning author values
+					$post->author = new User();
+					$post->author->name = $authorName;
+					$post->author->online = $authorIcon == "/Forum/skins/default/images/user_IsOnline.gif";
+					$post->author->joinDate = trim(substr($authorSect->childNodes->item(2)->nodeValue,8));
 
-				// Figure out if the poster is a mod/top poster/both and adjust information accordingly
-				if ($post->author->joinDate == "") {
-					// Figure out if mod
-					$modIndic = $authorSect->getElementsByTagName('img')->item(3)->getAttribute('src');
-					if (substr($modIndic,1,36) == "Forum/skins/default/images/users_top" && $authorSect->getElementsByTagName('img')->length == 5) {
-						// They're a mod and a top poster
-						$post->author->isMod = true;
-						$post->author->joinDate = trim(substr($authorSect->childNodes->item(4)->nodeValue,8));
-						$post->author->postCount = trim(substr($authorSect->childNodes->item(5)->nodeValue,13));
+					// Figure out if the poster is a mod/top poster/both and adjust information accordingly
+					if ($post->author->joinDate == "") {
+						// Figure out if mod
+						$modIndic = $authorSect->getElementsByTagName('img')->item(3)->getAttribute('src');
+						if (substr($modIndic,1,36) == "Forum/skins/default/images/users_top" && $authorSect->getElementsByTagName('img')->length == 5) {
+							// They're a mod and a top poster
+							$post->author->isMod = true;
+							$post->author->joinDate = trim(substr($authorSect->childNodes->item(4)->nodeValue,8));
+							$post->author->postCount = trim(substr($authorSect->childNodes->item(5)->nodeValue,13));
+						}
+						if ($modIndic == "/Forum/skins/default/images/users_moderator.gif") {
+							// If they're just a mod
+							$post->author->isMod = true;
+							$post->author->joinDate = trim(substr($authorSect->childNodes->item(3)->nodeValue,8));
+							$post->author->postCount = trim(substr($authorSect->childNodes->item(4)->nodeValue,13));
+						}
 					}
-					if ($modIndic == "/Forum/skins/default/images/users_moderator.gif") {
-						// If they're just a mod
-						$post->author->isMod = true;
-						$post->author->joinDate = trim(substr($authorSect->childNodes->item(3)->nodeValue,8));
-						$post->author->postCount = trim(substr($authorSect->childNodes->item(4)->nodeValue,13));
+					else {
+						$post->author->postCount = trim(substr($authorSect->childNodes->item(3)->nodeValue,13));
 					}
+					$authors[$authorName] = $post->author;
 				}
 				else {
-					$post->author->postCount = trim(substr($authorSect->childNodes->item(3)->nodeValue,13));
+					// reuse old object
+					$post->author = $authors[$authorName];
 				}
+
 				$postTitleSect = $postSect->childNodes->item(0)->childNodes->item(0);
 				$post->title = trim($postTitleSect->childNodes->item(0)->nodeValue);
 				$post->date = trim($postTitleSect->childNodes->item(3)->nodeValue);
