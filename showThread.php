@@ -55,7 +55,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 						Joined <b><?= $post->author->joinDate ?></b><br>
 						Total Posts <b><?= $post->author->postCount ?></b><br>
 			<?php if($post->author->groupInfo): ?>
-						Primary group: <b><?= $post->author->groupInfo->GroupName ?></b><br>
+						Primary group: <b><?= $post->author->groupInfo->group->name ?></b><br>
 			<?php endif ?>
 						<a href='<?= $post->author->url ?>' target='_blank'>View Profile &#187;</a>
 					</p>

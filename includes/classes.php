@@ -40,13 +40,42 @@ class EnhancedObject {
 	}
 }
 
+class Group extends EnhancedObject {
+	public $name;
+	public $id;
+	public function getUrl() {
+		return "http://www.roblox.com/Groups/Group.aspx?gid=" . $this->name;
+	}
+}
+
+class Role extends EnhancedObject {
+	public $name;
+	public $rank;
+}
+
+class GroupInfo extends EnhancedObject {
+	public $group;
+	public $role;
+
+	public static function fromJsonEntry($json) {
+		$gi = new GroupInfo();
+		$gi->group = new Group();
+		$gi->group->name = $json->GroupName;
+		$gi->group->id = $json->GroupId;
+		$gi->role = new Role();
+		$gi->role->name = $json->RoleSetName;
+		$gi->role->rank = $json->RoleSetRank;
+		return $gi;
+	}
+}
+
 class User extends EnhancedObject {
 	public $name;
 	public $joinDate;
 	public $postCount;
 	public $online;
 	public $isMod;
-	public $groupInfo; //this is an object based on the format of the json
+	public $groupInfo;
 
 	public function getUrl() {
 		return "http://roblox.com/User.aspx?username=" . $this->name;
@@ -58,7 +87,12 @@ class User extends EnhancedObject {
 	public static function getGroupInfo($users) {
 		$url = "http://www.roblox.com/Groups/GetPrimaryGroupInfo.ashx?users=".implode(',', $users);
 		$data = file_get_contents($url);
-		return json_decode($data);
+
+		$parsed = array();
+		foreach(json_decode($data) as $user => $entry) {
+			$parsed[$user] = GroupInfo::fromJsonEntry($entry);
+		}
+		return $parsed;
 	}
 }
 

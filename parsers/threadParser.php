@@ -105,8 +105,7 @@ class Thread extends EnhancedObject {
 		$groups = User::getGroupInfo(array_keys($authors));
 
 		foreach($authors as $name => $data) {
-			if(property_exists($groups, $name))
-				$data->groupInfo = $groups->$name;
+			$data->groupInfo = @$groups[$name];
 		}
 
 		return $posts;
