@@ -20,8 +20,9 @@ class Thread extends EnhancedObject {
 		return "http://www.roblox.com/Forum/ShowPost.aspx?PostID={$this->id}&PageIndex={$this->pageNum}";
 	}
 
-	public function forEachPost($callback) {
+	public function loadPosts() {
 		global $errored, $page;
+		$posts = array();
 		// Setup
 		$html = @file_get_contents($this->url);
 		if ($html === false) {
@@ -86,10 +87,11 @@ class Thread extends EnhancedObject {
 				$post->content = innerXML($postSect->childNodes->item(1)->childNodes->item(0)->childNodes->item(0));
 				// $post->content = current($postSect->childNodes->item(1)->xpath("//span[@class='normalTextSmall']"))->nodeValue;
 
-				// send the post to the callback so that it can be rendered
-				$callback($post);
+				$posts[] = $post;
 			}
 		}
+
+		return $posts;
 	}
 }
 ?>

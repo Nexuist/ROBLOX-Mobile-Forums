@@ -37,8 +37,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		<ul data-role="listview">
 		<?php 
 		// Loop through the posts
-		// And call the anonymous function created to handle rendering
-		$thread->forEachPost(function($post) { ?>
+		foreach($thread->posts as $post): ?>
 			<li data-role='list-divider'><?= $post->title ?></li>
 			<li data-theme='d'>
 				<div data-role='collapsible' data-icon='delete' data-mini='true'>
@@ -65,7 +64,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 				</p>
 			</li>
-<?php }) ?>
+<?php endforeach ?>
 		</ul>
 	</div>
 	<?php include("includes/paginationFooter.php"); ?>
