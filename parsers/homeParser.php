@@ -29,7 +29,7 @@ else
 			// Forum
 			if (strlen($href) >= 31 and substr($href,16,5) == ".aspx") {
 
-				$url = "forum-" . substr($href,30);
+				$url = "forum" . substr($href,30);
 				$desc = trim($title->parentNode->getElementsByTagName('span')->item(0)->nodeValue);
 
 				$xml_forum = $group->addChild('forum');

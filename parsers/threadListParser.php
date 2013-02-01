@@ -20,8 +20,7 @@ else
 				$pages = 1;
 				$title = $thread->childNodes->item(1)->getElementsByTagName('a')->item(0)->nodeValue;
 				if ($thread->childNodes->item(1)->childNodes->length > 1) {
-					//Dealing with multiple pages
-					// HAXXXXXXXXXXXXXXXX
+					// Handling multiple pages
 					$titleWithPages = $thread->childNodes->item(1)->nodeValue;
 					$pagesArray = explode(",",$titleWithPages);
 					$pages = substr($pagesArray[count($pagesArray)-1],0,-1);
@@ -31,7 +30,7 @@ else
 				$replies = $thread->childNodes->item(3)->nodeValue;
 				$views = $thread->childNodes->item(4)->nodeValue;
 				
-				//Doing magic on the last column
+				// Handling pinned posts
 				$lastPostedSect = $thread->childNodes->item(5)->nodeValue;
 				if (substr($lastPostedSect,0,11) == "Pinned Post") {
 					$pinned = true;

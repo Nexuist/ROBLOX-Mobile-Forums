@@ -37,6 +37,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		<ul data-role="listview">
 		<?php 
 		// Loop through the posts
+<<<<<<< HEAD
 		foreach($thread->posts as $post): ?>
 			<li data-role='list-divider'><?= $post->title ?></li>
 			<li data-theme='d'>
@@ -68,6 +69,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 				</p>
 			</li>
 <?php endforeach ?>
+=======
+		// And call the anonymous function created to handle rendering
+		$thread->forEachPost(function($post) {
+			// Render each post
+			include 'post.php';
+		}) ?>
+>>>>>>> Fixed .htaccess, added templates/post.php
 		</ul>
 	</div>
 	<?php include("includes/paginationFooter.php"); ?>
