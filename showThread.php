@@ -37,7 +37,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		<ul data-role="listview">
 		<?php 
 		// Loop through the posts
-<<<<<<< HEAD
 		foreach($thread->posts as $post): ?>
 			<li data-role='list-divider'><?= $post->title ?></li>
 			<li data-theme='d'>
