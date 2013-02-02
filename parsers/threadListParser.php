@@ -34,6 +34,7 @@ else
 				$lastPostedSect = $thread->childNodes->item(5)->nodeValue;
 				if (substr($lastPostedSect,0,11) == "Pinned Post") {
 					$pinned = true;
+					$lastPoster = substr($lastPostedSect,14);
 				}
 				else {
 					$pinned = false;
