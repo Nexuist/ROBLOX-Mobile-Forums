@@ -15,9 +15,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 	try {
 
-		templatePage("$name | ROBLOX Forums", function() {
-			global $thread, $errored;
-			?>
+		templatePage($thread->posts[0]->title." | ROBLOX Forums", function() use ($thread) { ?>
 			<a href='<?= htmlspecialchars($thread->url) ?>' target='_blank' data-role='button'>
 				Show Original
 			</a>
@@ -29,10 +27,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 				include 'templates/post.php';
 			endforeach ?>
 			</ul>
-			<?php
-		}, $thread->totalPages > 1 ? function() {
-			global $thread;
-			?>
+		<?php }, $thread->totalPages > 1 ? function() use ($thread) { ?>
 			<div style = "text-align: center;" data-role="controlgroup" data-type="horizontal">
 			<?php if ($thread->pageNum != 1): ?>
 				<a href='?page=<?= $thread->pageNum - 1 ?>'
@@ -44,22 +39,21 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 				   data-theme='e' data-role='button' data-icon='arrow-r' data-iconpos='notext'>Next</a>
 			<?php endif ?>
 			</div>
-			<?php
-		} : NULL);
+		<?php } : NULL);
 	}
 	catch(RobloxForumError $e) {
-		templatePage("404 | ROBLOX Forums", function() { global $e; ?>
+		templatePage("404 | ROBLOX Forums", function() use ($e) { ?>
 			<h3><?= $e->title ?></h3>
 			<p><?= $e->description ?></p>
 		<?php });
 	}
 	catch(NoSuchThreadException $e) {
-		templatePage("404 | ROBLOX Forums", function() { ?>
+		templatePage("404 | ROBLOX Forums", function() use ($e) { ?>
 			<p><strong>Error:</strong> Thread not found</p>
 		<?php });
 	}
 	catch(ThreadParseException $e) {
-		templatePage("404 | ROBLOX Forums", function() { ?>
+		templatePage("404 | ROBLOX Forums", function() use ($e) { ?>
 			<p><strong>Error:</strong> Could not parse the requested thread - perhaps the site has updated?</p>
 		<?php });
 	}
