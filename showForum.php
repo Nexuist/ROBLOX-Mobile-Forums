@@ -1,4 +1,7 @@
 <?php
+require_once 'parsers/threadParser.php';
+
+
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 	$id = (int) $_GET['id'];
 
@@ -41,7 +44,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			<li data-role = "list-divider">Threads</li>
 			<?php include("parsers/threadListParser.php"); ?>
 		</ul>
-		<?php include('includes/paginationFooter.php'); ?>
 		<!--/Threads-->
 		<?php
 		}
@@ -51,6 +53,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 		}
 		?>
 	</div>
+	<?php include('includes/paginationFooter.php'); ?>
 	<!--/Body -->
 </div>
 </body>
