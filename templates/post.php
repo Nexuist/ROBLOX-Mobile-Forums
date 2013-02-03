@@ -11,13 +11,13 @@
 						</font>
 					</h5>
 					<p>
-						<img src='<?= $post->author->img ?>' alt='<?= $post->author->name ?>' /><br>
+						<img src='<?= htmlentities($post->author->img) ?>' alt='<?= $post->author->name ?>' /><br>
 						Joined <b><?= $post->author->joinDate ?></b><br>
 						Total Posts <b><?= $post->author->postCount ?></b><br>
 			<?php if($post->author->groupInfo): ?>
-						Primary Group <a href="<?= $post->author->groupInfo->group->url ?>" target='_blank'><?= $post->author->groupInfo->group->name ?></a><br>
+						Primary Group <a href="<?= htmlentities($post->author->groupInfo->group->url) ?>" target='_blank'><?= $post->author->groupInfo->group->name ?></a><br>
 			<?php endif ?>
-						<a href='<?= $post->author->url ?>' target='_blank'>View Profile &#187;</a>
+						<a href='<?= htmlentities($post->author->url) ?>' target='_blank'>View Profile &#187;</a>
 					</p>
 				</div>
 				<br>
