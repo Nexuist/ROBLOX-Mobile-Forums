@@ -1,4 +1,3 @@
-		foreach($thread->posts as $post): ?>
 			<li data-role='list-divider'><?= $post->title ?></li>
 			<li data-theme='d'>
 				<div data-role='collapsible' data-icon='delete' data-mini='true'>
