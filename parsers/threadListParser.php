@@ -45,6 +45,19 @@ class Forum extends EnhancedObject {
 		return $page;
 	}
 
+	public function loadTotalPages() {
+		// Error if thread doesn't exist
+		$holder = $this->page->getElementById("ctl00_cphRoblox_ThreadView1_ctl00_Pager");
+		if (!$holder) throw new ThreadParseException();
+
+		// Get the total number of pages
+		$pagination = $holder->childNodes->item(0)->nodeValue;
+		$matches = array();
+		if(preg_match('/page\s+[\d,]+\s+of\s+([\d,]+)/i', $pagination, $matches)) {
+			return (int) str_replace(",", "", $matches[1]);
+		}
+	}
+
 	public function loadThreads() {
 		$holder = $this->page->getElementById('ctl00_cphRoblox_ThreadView1_ctl00_ThreadList');
 		if (!$holder) {

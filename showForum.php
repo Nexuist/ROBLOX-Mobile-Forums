@@ -40,7 +40,19 @@ try {
 			<?php endforeach ?>
 		</ul>
 		<!--/Threads-->
-	<?php });
+	<?php }, $forum->totalPages > 1 ? function() use ($forum) { ?>
+		<div style = "text-align: center;" data-role="controlgroup" data-type="horizontal">
+		<?php if ($forum->pageNum != 1): ?>
+			<a href='?page=<?= $forum->pageNum - 1 ?>'
+			   data-theme='e' data-role='button' data-icon='arrow-l' data-iconpos='notext'>Previous</a>
+		<?php endif ?>
+			<a href='#' data-role='button' data-theme='c'><?= $forum->pageNum ?> of <?= $forum->totalPages?></a>
+		<?php if ($forum->pageNum != $forum->totalPages): ?>
+			<a href='?page=<?= $forum->pageNum + 1 ?>'
+			   data-theme='e' data-role='button' data-icon='arrow-r' data-iconpos='notext'>Next</a>
+		<?php endif ?>
+		</div>
+	<?php } : NULL);
 }
 catch(NoSuchForumException $e) {
 	templatePage("404 | ROBLOX Forums", function() use ($e, $id) { ?>
