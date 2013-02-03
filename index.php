@@ -30,7 +30,7 @@
 		</ul>
 		<!--/Forum list-->
 		<br><br>
-		&copy; 2013 Deplex Studios &bull; <a href = "thread86926019">Changelog</a>
+		&copy; 2013 Deplex Studios &bull; <a href = "thread88375831">Changelog</a>
 	</div>
 	<!--/Body -->
 </div>
