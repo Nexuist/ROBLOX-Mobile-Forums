@@ -1,6 +1,6 @@
 			<li data-role='list-divider'><?= $post->title ?></li>
 			<li data-theme='d'>
-				<div data-role='collapsible' data-icon='delete' data-mini='true'>
+				<div data-content-theme="d" data-role='collapsible' data-iconpos='right' data-mini='true'>
 					<h5>
 			<?php if($post->author->isMod): ?>
 						<img src='includes/mod.gif' alt='MOD' />
