@@ -47,6 +47,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			<?php
 		} : NULL);
 	}
+	catch(RobloxForumError $e) {
+		templatePage("404 | ROBLOX Forums", function() { global $e; ?>
+			<h3><?= $e->title ?></h3>
+			<p><?= $e->description ?></p>
+		<?php });
+	}
 	catch(NoSuchThreadException $e) {
 		templatePage("404 | ROBLOX Forums", function() { ?>
 			<p><strong>Error:</strong> Thread not found</p>

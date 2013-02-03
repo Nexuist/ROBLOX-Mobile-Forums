@@ -12,6 +12,16 @@ function innerXML($node) {
 	return $doc->saveXML($frag);
 }
 
+class RobloxForumError extends Exception {
+	public $description;
+	public $title;
+	public function __construct($title, $description) {
+		$this->title = $title;
+		$this->description = $description;
+		parent::__construct($title);
+	}
+}
+
 class NoSuchThreadException extends Exception {}
 class ThreadParseException extends Exception {}
 
@@ -27,6 +37,14 @@ class Thread extends EnhancedObject {
 		$page = new DOMDocument();
 		$page -> preserveWhiteSpace = false;
 		$page -> loadHTML($html);
+
+		// Handle the errors in blue boxes the forum sometimes gives
+		$errorBox = $page->getElementById("ctl00_cphRoblox_Message1_ctl00_MessageTitle");
+		if($errorBox) {
+			$errMsg = $page->getElementById("ctl00_cphRoblox_Message1_ctl00_MessageBody");
+			throw new RobloxForumError($errorBox->nodeValue, $errMsg->nodeValue);
+		}
+
 		return $page;
 	}
 
