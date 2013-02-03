@@ -1,6 +1,6 @@
 			<li data-role='list-divider'><?= $post->title ?> <p class="ui-li-aside"><?= $post->date ?></li>
 			<li data-theme='d'>
-				<div data-content-theme="b" data-role='collapsible' data-iconpos='right' data-mini='true'>
+				<div data-content-theme="b" data-theme="c" data-role='collapsible' data-iconpos='right' data-mini='true'>
 					<h5>
 			<?php if($post->author->isMod): ?>
 						<img src='includes/mod.gif' alt='MOD' />
