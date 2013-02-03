@@ -13,7 +13,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 	$thread->id = $id;
 	$thread->pageNum = $pageNum;
 
-	templatePage('$name | ROBLOX Forums', function() {
+	templatePage("$name | ROBLOX Forums", function() {
 		global $thread;
 		global $name, $desc, $id, $pageNum, $page;
 	?>
