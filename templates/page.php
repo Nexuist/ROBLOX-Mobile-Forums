@@ -10,6 +10,13 @@ function templatePage($title, $makeContent, $makeFooter = NULL) {
 	<meta charset='utf-8' />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+	<script>
+	$(document).bind("mobileinit", function(){
+		$.extend($.mobile, {
+			defaultPageTransition: 'slide'
+		});
+	});
+	</script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
 	<style type = "text/css">
 		a {
