@@ -29,6 +29,12 @@ class Thread extends EnhancedObject {
 	public $id;
 	public $pageNum;
 
+	public $pinned;
+	public $author;
+	public $lastPoster;
+	public $replies;
+	public $views;
+
 	public function loadPage() {
 		$html = @file_get_contents($this->url);
 		if(!$html) throw new NoSuchThreadException();
@@ -67,6 +73,10 @@ class Thread extends EnhancedObject {
 		if(preg_match('/page\s+[\d,]+\s+of\s+([\d,]+)/i', $pagination, $matches)) {
 			return (int) str_replace(",", "", $matches[1]);
 		}
+	}
+
+	public function loadTitle() {
+		return $this->posts[0]->title;
 	}
 
 	public function loadPosts() {
