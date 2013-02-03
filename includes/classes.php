@@ -114,10 +114,11 @@ class User extends EnhancedObject {
 				$names[] = $name;
 
 		$url = "http://www.roblox.com/Groups/GetPrimaryGroupInfo.ashx?users=".implode(',', $names);
+
 		$data = file_get_contents($url);
 		$parsed = array();
 		foreach(json_decode($data) as $username => $entry) {
-			$_instances[$username]->groupInfo = GroupInfo::fromJsonEntry($entry);
+			self::$_instances[$username]->groupInfo = GroupInfo::fromJsonEntry($entry);
 		}
 	}
 }
