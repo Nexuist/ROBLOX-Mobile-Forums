@@ -59,16 +59,12 @@ class Thread extends EnhancedObject {
 	}
 
 	public function loadTotalPages() {
-		$page = $this->page;
-
 		// Error if thread doesn't exist
-		$holder = $page->getElementById("ctl00_cphRoblox_PostView1_ctl00_Pager");
-		if (!$holder) {
-			throw new ThreadParseException();
-		}
+		$holder = $this->page->getElementById("ctl00_cphRoblox_PostView1_ctl00_Pager");
+		if (!$holder) throw new ThreadParseException();
 
 		// Get the total number of pages
-		$pagination = $page->getElementById("ctl00_cphRoblox_PostView1_ctl00_Pager")->childNodes->item(0)->nodeValue;
+		$pagination = $holder->childNodes->item(0)->nodeValue;
 		$matches = array();
 		if(preg_match('/page\s+[\d,]+\s+of\s+([\d,]+)/i', $pagination, $matches)) {
 			return (int) str_replace(",", "", $matches[1]);
