@@ -12,13 +12,16 @@ function innerXML($node) {
 	return $doc->saveXML($frag);
 }
 
+class NoSuchThreadException extends Exception {}
+class ThreadParseException extends Exception {}
+
 class Thread extends EnhancedObject {
 	public $id;
 	public $pageNum;
 
 	public function loadPage() {
 		$html = @file_get_contents($this->url);
-		if(!$html) return NULL;
+		if(!$html) throw new NoSuchThreadException();
 
 		libxml_use_internal_errors(true);
 		$page = new DOMDocument();
@@ -34,8 +37,10 @@ class Thread extends EnhancedObject {
 	public function loadTotalPages() {
 		$page = $this->page;
 
-		if(!$page) {
-			return NULL;
+		// Error if thread doesn't exist
+		$holder = $page->getElementById("ctl00_cphRoblox_PostView1_ctl00_Pager");
+		if (!$holder) {
+			throw new ThreadParseException();
 		}
 
 		// Get the total number of pages
@@ -53,19 +58,11 @@ class Thread extends EnhancedObject {
 
 		$posts = array();
 
-		if(!$page) {
-			echo "<li><h1>Error</h1><p>The page couldn't be found.</p></li>";
-			$errored = true; // Needed for paginationFooter to not error
-			return $posts;
-		}
-
 		$holder = $page->getElementById('ctl00_cphRoblox_PostView1_ctl00_PostList');
 
 		// Error if thread doesn't exist
 		if (!$holder) {
-			echo "<li><h3>Error</h3><p>An error occured while parsing this thread.</p></li>";
-			$errored = true; // Needed for paginationFooter to not error
-			return $posts;
+			throw new ThreadParseException();;
 		}
 
 		$holder = $holder->childNodes;
