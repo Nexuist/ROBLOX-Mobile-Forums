@@ -1,4 +1,4 @@
-			<li data-role='list-divider'><?= $post->title ?></li>
+			<li data-role='list-divider'><?= $post->title ?> <p class="ui-li-aside"><?= $post->date ?></li>
 			<li data-theme='d'>
 				<div data-content-theme="d" data-role='collapsible' data-iconpos='right' data-mini='true'>
 					<h5>
@@ -22,8 +22,6 @@
 				</div>
 				<br>
 				<p style='word-break: break-all;'>
-					<?= $post->content ?><br><br>
-					<b>Posted</b> <?= $post->date ?>
-
+					<?= $post->content ?>
 				</p>
 			</li>
