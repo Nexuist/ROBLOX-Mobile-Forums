@@ -29,7 +29,7 @@ class Thread extends EnhancedObject {
 		if ($html === false) {
 			echo "<li><h1>Error</h1><p>The page couldn't be found.</p></li>";
 			$errored = true; // Needed for paginationFooter to not error
-			return;
+			return $posts;
 		}
 
 		libxml_use_internal_errors(true);
@@ -43,7 +43,7 @@ class Thread extends EnhancedObject {
 		if (!$holder) {
 			echo "<li><h3>Error</h3><p>An error occured while parsing this thread.</p></li>";
 			$errored = true; // Needed for paginationFooter to not error
-			return;
+			return $posts;
 		}
 
 		$holder = $holder->childNodes;
