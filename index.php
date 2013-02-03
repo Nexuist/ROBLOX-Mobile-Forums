@@ -6,7 +6,7 @@
 	<script type="text/javascript" src = "includes/ga_tracking.js"></script>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" data-add-back-btn="true">
 	<!--Header-->
 	<?php
 	$title = "ROBLOX Forums";
