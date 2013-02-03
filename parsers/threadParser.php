@@ -16,26 +16,33 @@ class Thread extends EnhancedObject {
 	public $id;
 	public $pageNum;
 
+	public function loadPage() {
+		$html = @file_get_contents($this->url);
+		if(!$html) return NULL;
+
+		libxml_use_internal_errors(true);
+		$page = new DOMDocument();
+		$page -> preserveWhiteSpace = false;
+		$page -> loadHTML($html);
+		return $page;
+	}
+
 	public function getUrl() {
 		return "http://www.roblox.com/Forum/ShowPost.aspx?PostID={$this->id}&PageIndex={$this->pageNum}";
 	}
 
 	public function loadPosts() {
 		global $errored, $page;
+		# Temporary bodge for pagination
+		$page = $this->page;
+
 		$posts = array();
 
-		// Setup
-		$html = @file_get_contents($this->url);
-		if ($html === false) {
+		if(!$page) {
 			echo "<li><h1>Error</h1><p>The page couldn't be found.</p></li>";
 			$errored = true; // Needed for paginationFooter to not error
 			return $posts;
 		}
-
-		libxml_use_internal_errors(true);
-		$page = new DOMDocument();
-		$page -> preserveWhiteSpace = false;
-		$page -> loadHTML($html);
 
 		$holder = $page->getElementById('ctl00_cphRoblox_PostView1_ctl00_PostList');
 
