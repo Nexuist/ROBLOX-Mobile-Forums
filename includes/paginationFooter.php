@@ -13,7 +13,6 @@ $totalPages = substr($rawPages, strpos($rawPages, "of") + 2, strpos($rawPages,"G
 $totalPages = str_replace(",","",$totalPages);
 if ($totalPages > 1) {
 ?>
-<div data-role = "footer" data-theme = "b" class = "ui-bar">
 
 			<div style = "text-align: center;" data-role="controlgroup" data-type="horizontal">
 
@@ -34,5 +33,4 @@ if ($totalPages > 1) {
 
 			</div>
 
-</div>
 <?php }} ?>

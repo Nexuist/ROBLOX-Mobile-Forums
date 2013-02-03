@@ -1,4 +1,5 @@
 <?php
+require_once "templates/page.php";
 require_once 'parsers/threadParser.php';
 
 
@@ -17,25 +18,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 	else {
 		$pageNum = 1;
 	}
+}
+if($name) {
+	templatePage('$name | ROBLOX Forums', function() {
+		global $name, $desc, $id, $pageNum, $page;
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title><?php echo $name; ?></title>
-	<?php include("../../../includes/defaultMobile.php"); ?>
-	<script type="text/javascript" src = "includes/ga_tracking.js"></script>
-</head>
-<body>
-<div data-role="page"  data-add-back-btn="true">
-	<!--Header-->
-	<?php
-	$title = $name;
-	include("includes/header.php");
-	?>
-	<!--/Header-->
-	<!--Body-->
-	<div data-role="content">
-		<?php if ($name != "") {?>
 		<!--Threads-->
 		<ul data-role="listview">
 			<!--Intro -->
@@ -45,17 +32,16 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			<?php include("parsers/threadListParser.php"); ?>
 		</ul>
 		<!--/Threads-->
-		<?php
-		}
-		else
-		{
-			echo "<h3>Error</h3><p>The requested forum was not found.";
-		}
-		?>
-	</div>
-	<?php include('includes/paginationFooter.php'); ?>
-	<!--/Body -->
-</div>
-</body>
-</html>
-<?php } ?>
+<?php
+	}, function() {
+		global $name, $desc, $id, $pageNum, $page;
+		include('includes/paginationFooter.php');
+	});
+}
+else {
+	templatePage('Error | ROBLOX Forums', function() {
+?>
+		<h3>Error</h3><p>The requested forum was not found.
+<?php
+	});
+}

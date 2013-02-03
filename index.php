@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>ROBLOX Forum</title>
-	<?php include("../../../includes/defaultMobile.php"); ?>
-	<script type="text/javascript" src = "includes/ga_tracking.js"></script>
-</head>
-<body>
-<div data-role="page" data-add-back-btn="true">
-	<!--Header-->
-	<?php
-	$title = "ROBLOX Forums";
-	include("includes/header.php");
-	?>
-	<!--/Header-->
-	<!--Body-->
-	<div data-role="content">
+<?php
+require_once "templates/page.php";
+
+templatePage('ROBLOX Forums', function() {
+?>
 		<!--Forum list-->
 		<ul data-role="listview">
 			<!--Intro-->
@@ -32,8 +20,5 @@
 		<!--/Forum list-->
 		<br><br>
 		&copy; 2013 Deplex Studios &bull; <a href = "thread88375831">Changelog</a>
-	</div>
-	<!--/Body -->
-</div>
-</body>
-</html>
+<?
+});

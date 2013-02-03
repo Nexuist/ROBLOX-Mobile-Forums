@@ -1,4 +1,5 @@
 <?php
+require_once "templates/page.php";
 require_once 'parsers/threadParser.php';
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -12,24 +13,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 	$thread->id = $id;
 	$thread->pageNum = $pageNum;
 
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>ROBLOX Forums</title>
-	<?php include("../../../includes/defaultMobile.php"); ?>
-	<script type="text/javascript" src = "includes/ga_tracking.js"></script>
-</head>
-<body>
-<div data-role="page" data-add-back-btn="true">
-	<!--Header-->
-	<?php
-	$title = "ROBLOX Forums";
-	include("includes/header.php");
+	templatePage('$name | ROBLOX Forums', function() {
+		global $thread;
+		global $name, $desc, $id, $pageNum, $page;
 	?>
-	<!--/Header-->
-	<!--Body-->
-	<div data-role="content">
 		<a href='<?= htmlspecialchars($thread->url) ?>' target='_blank' data-role='button'>
 			Show Original
 		</a>
@@ -41,12 +28,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 			include 'templates/post.php';
 		endforeach ?>
 		</ul>
-	</div>
-	<?php include("includes/paginationFooter.php"); ?>
-	<!--/Body -->
-</div>
-</body>
-</html>
 <?php
+	}, function() {
+		global $name, $desc, $id, $pageNum, $page;
+		include('includes/paginationFooter.php');
+	});
 }
 ?>
