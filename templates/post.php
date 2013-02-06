@@ -5,7 +5,7 @@
 			<?php if($post->author->isMod): ?>
 						<img src='includes/mod.gif' alt='MOD' />
 			<?php endif ?>
-						<font color='<?php if($post->author->online): ?>green<?php else: ?>red<?php endif ?>'>
+						<img src='includes/<?php if($post->author->online): ?>online<?php else: ?>offline<?php endif ?>.png'>
 							<?= $post->author->name ?>
 
 						</font>
