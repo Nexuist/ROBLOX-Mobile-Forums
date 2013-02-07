@@ -18,6 +18,7 @@ function templatePage($title, $makeContent, $makeFooter = NULL) {
 	});
 	</script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<link rel="shortcut icon" href="http://www.imgbomb.com/i/d15/5zfem.png" />
 	<style type = "text/css">
 		a {
 			text-decoration: none;
