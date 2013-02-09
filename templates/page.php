@@ -33,12 +33,26 @@ function templatePage($title, $makeContent, $makeFooter = NULL) {
 	<script type="text/javascript" src = "includes/ga_tracking.js"></script>
 </head>
 <body>
-	<div data-role="page" data-add-back-btn="true">
+	<div data-role="page">
+	
+		<!--Panel-->
+        <div data-role="panel" id="forumPanel">
+            <ul data-theme="d" data-divider-theme="a" data-role = "listview">
+                <?php include("panel.php"); ?>
+            </ul>
+        </div>
+        <!--/Panel-->
+		
 		<!--Header-->
 		<div data-role="header" data-theme = "b" data-position = "fixed">
+			<a href="#forumPanel" data-role="button" 
+                data-icon="bars" 
+                data-iconpos = "notext" 
+                class = "ui-btn-left">Open panel</a>
 			<a href="index.php" data-role="button"
 			   data-icon="home" data-direction="reverse"
-			   data-iconpos="notext" class="ui-btn-right">Home</a>
+			   data-iconpos="notext" 
+			   class="ui-btn-right">Home</a>
 			<div style="text-align: center; padding: 3px;">
 				<img src = "includes/forumslogo.png">
 			</div>
