@@ -75,6 +75,14 @@ class Thread extends EnhancedObject {
 		return $this->posts[0]->title;
 	}
 
+	public function loadAuthors() {
+		$authors = array();
+		foreach($this->posts as $p) {
+			$authors[$p->author->name] = $p->author;
+		}
+		return array_values($authors);
+	}
+
 	public function loadPosts() {
 		global $errored, $page;
 		# Temporary bodge for pagination
