@@ -1,5 +1,5 @@
 <?php
-function templatePage($title, $makeContent, $makeFooter = NULL) {
+function templatePage($title, $makeContent, $makeFooter = NULL, $makePanels = NULL) {
 
 ?>
 <!DOCTYPE html>
@@ -34,15 +34,15 @@ function templatePage($title, $makeContent, $makeFooter = NULL) {
 </head>
 <body>
 	<div data-role="page">
-	
 		<!--Panel-->
         <div data-role="panel" id="forumPanel">
             <ul data-theme="d" data-divider-theme="a" data-role = "listview">
                 <?php include("includes/panel.php"); ?>
             </ul>
         </div>
+		<?php if($makePanels) $makePanels(); ?>
         <!--/Panel-->
-		
+
 		<!--Header-->
 		<div data-role="header" data-theme = "b" data-position = "fixed">
 			<a href="#forumPanel" data-role="button" 
@@ -66,7 +66,7 @@ function templatePage($title, $makeContent, $makeFooter = NULL) {
 		<div data-role="footer" data-theme="b" class="ui-bar">
 			<?php $makeFooter() ?>
 		</div>
-	<?php endif ?>
+		<?php endif ?>
 	</div>
 </body>
 </html>
