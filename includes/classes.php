@@ -49,6 +49,9 @@ class User extends EnhancedObject {
 	public function getImg() {
 		return "http://www.roblox.com/Thumbs/Avatar.ashx?x=100&y=100&Format=Png&username=" . $this->name;
 	}
+	public function getSmallImg() {
+		return "http://www.roblox.com/Thumbs/Avatar.ashx?x=48&y=48&Format=Png&username=" . $this->name;
+	}
 
 	/**
 	 * Private constructor to create a user with a given name
