@@ -131,4 +131,12 @@ class Post extends EnhancedObject {
 	public $date;
 
 	public $titleIsOriginal; # to reduce duplicate titles
+
+	public function getWrappedDate() {
+		$parts = explode(' ', $this->date);
+		if(count($parts) == 5)
+			return array("{$parts[0]} {$parts[1]} {$parts[2]}", "{$parts[3]} {$parts[4]}");
+		else
+			return array($this->date);
+	}
 }
