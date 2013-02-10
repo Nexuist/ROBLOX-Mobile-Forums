@@ -1,1 +1,27 @@
+.post {
+	overflow: hidden;
+}
+.post .post-info {
+	font-weight: normal;
+	font-size: 80%;
+	color: #808080;
+	margin-bottom: 5px;
+}
+.post .post-info .author-avatar {
+	display: block;
+	float: left;
+}
+.post .post-info .author-name {
+	display: inline-block;
+}
+.post .post-info .author-status {
+	color: green;
+	font-weight: normal;
+}
+.post .post-info .post-date {
+	display: block;
+	float: right;
+	font-size: 80%;
+	text-align: right;
 
+}
