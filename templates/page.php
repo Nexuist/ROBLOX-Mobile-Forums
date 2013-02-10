@@ -38,7 +38,7 @@ function templatePage($title, $makeContent, $makeFooter = NULL) {
 		<!--Panel-->
         <div data-role="panel" id="forumPanel">
             <ul data-theme="d" data-divider-theme="a" data-role = "listview">
-                <?php include("panel.php"); ?>
+                <?php include("includes/panel.php"); ?>
             </ul>
         </div>
         <!--/Panel-->
