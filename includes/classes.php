@@ -129,4 +129,6 @@ class Post extends EnhancedObject {
 	public $topic;
 	public $content;
 	public $date;
+
+	public $titleIsOriginal; # to reduce duplicate titles
 }

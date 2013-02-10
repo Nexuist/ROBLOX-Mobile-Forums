@@ -1,4 +1,8 @@
+			<? if($post->titleIsOriginal): ?>
 			<li data-role='list-divider'><?= $post->title ?> <p class="ui-li-aside"><?= $post->date ?></li>
+			<? else: ?>
+			<li data-role='list-divider' data-theme="d">&nbsp;<p class="ui-li-aside"><?= $post->date ?></li>
+			<? endif ?>
 			<li data-theme='d'>
 				<div data-content-theme="b" data-theme="c" data-role='collapsible' data-iconpos='right' data-mini='true'>
 					<h5>

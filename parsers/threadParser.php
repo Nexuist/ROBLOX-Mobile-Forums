@@ -94,10 +94,11 @@ class Thread extends EnhancedObject {
 
 		// Error if thread doesn't exist
 		if (!$holder) {
-			throw new ThreadParseException();;
+			throw new ThreadParseException();
 		}
 
 		$holder = $holder->childNodes;
+		$lastPost = null;
 		foreach($holder as $post) {
 			if (($post->childNodes->length == 3) && ($post->getElementsByTagName('td')->length != 0)) {
 				$postSect =  $post->childNodes->item(1)->childNodes->item(0);
@@ -114,7 +115,11 @@ class Thread extends EnhancedObject {
 				$post->content = innerXML($postSect->childNodes->item(1)->childNodes->item(0)->childNodes->item(0));
 				// $post->content = current($postSect->childNodes->item(1)->xpath("//span[@class='normalTextSmall']"))->nodeValue;
 
+				$post->titleIsOriginal = $post->title != $lastPost->title && $post->title != "Re: ".$lastPost->title;
+
 				$posts[] = $post;
+				$lastPost = $post;
+
 			}
 		}
 
