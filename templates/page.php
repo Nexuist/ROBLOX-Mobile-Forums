@@ -9,6 +9,7 @@ function templatePage($title, $makeContent, $makeFooter = NULL, $makePanels = NU
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset='utf-8' />
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0-rc.1/jquery.mobile-1.3.0-rc.1.min.css" />
+	<link rel="stylesheet" href="style.css" />
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script>
 	$(document).bind("mobileinit", function(){
