@@ -6,9 +6,7 @@
 						<img src='includes/mod.gif' alt='MOD' />
 			<?php endif ?>
 						<img src='includes/<?php if($post->author->online): ?>online<?php else: ?>offline<?php endif ?>.png'>
-							<?= $post->author->name ?>
-
-						</font>
+						<?= $post->author->name ?>
 					</h5>
 					<p>
 						<img src='<?= htmlentities($post->author->img) ?>' alt='<?= $post->author->name ?>' /><br>
@@ -22,6 +20,7 @@
 				</div>
 				<br>
 				<p style='word-break: break-all;'>
+				<a href="#author-<?= $post->author->name ?>"><?= $post->author->name ?></a>
 					<?= $post->content ?>
 				</p>
 			</li>

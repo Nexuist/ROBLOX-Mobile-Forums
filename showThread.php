@@ -39,7 +39,21 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 				   data-theme='e' data-role='button' data-icon='arrow-r' data-iconpos='notext'>Next</a>
 			<?php endif ?>
 			</div>
-		<?php } : NULL);
+		<?php } : NULL, function() use ($thread) {
+			foreach($thread->authors as $a) { ?>
+			<div data-role="panel" id="author-<?= $a->name ?>">
+				<p>
+					<img src='<?= htmlentities($a->img) ?>' alt='<?= $a->name ?>' /><br>
+					Joined <b><?= $a->joinDate ?></b><br>
+					Total Posts <b><?= $a->postCount ?></b><br>
+		<?php if($a->groupInfo): ?>
+					Primary Group <a href="<?= htmlentities($a->groupInfo->group->url) ?>" target='_blank'><?= $a->groupInfo->group->name ?></a><br>
+		<?php endif ?>
+					<a href='<?= htmlentities($a->url) ?>' target='_blank'>View Profile &#187;</a>
+				</p>
+			</div><!-- /panel -->
+			<?php }
+		});
 	}
 	catch(RobloxForumError $e) {
 		templatePage("404 | ROBLOX Forums", function() use ($e) { ?>
