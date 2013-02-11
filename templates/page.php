@@ -36,12 +36,15 @@ function templatePage($title, $makeContent, $makeFooter = NULL, $makePanels = NU
 <body>
 	<div data-role="page">
 		<!--Panel-->
+		<?php if ($makePanels) {
+			$makePanels();
+		?>
         <div data-role="panel" id="forumPanel">
             <ul data-theme="d" data-divider-theme="a" data-role = "listview">
                 <?php include("includes/panel.php"); ?>
             </ul>
         </div>
-		<?php if($makePanels) $makePanels(); ?>
+		<?php } ?>
         <!--/Panel-->
 
 		<!--Header-->
