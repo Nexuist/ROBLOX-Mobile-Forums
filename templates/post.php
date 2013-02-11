@@ -34,7 +34,7 @@
 						&bull; <span class="author-status">online</span>
 						<?php endif ?>
 						<span class="post-date"><?= implode('<br />', $post->wrappedDate) ?></span>
-					</div>
+					</div><br><br>
 					<p style='word-break: break-all; overflow: visible'>
 						<?= $post->content ?>
 					</p>

@@ -52,7 +52,7 @@ try {
 			   data-theme='e' data-role='button' data-icon='arrow-r' data-iconpos='notext'>Next</a>
 		<?php endif ?>
 		</div>
-	<?php } : NULL);
+	<?php } : NULL, function() {});
 }
 catch(NoSuchForumException $e) {
 	templatePage("404 | ROBLOX Forums", function() use ($e, $id) { ?>
