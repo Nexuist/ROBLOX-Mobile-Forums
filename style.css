@@ -26,3 +26,7 @@
 	text-align: right;
         padding: 1px 0px 1px 1px;
 }
+
+.post .post-content {
+	word-break: break-all;
+}

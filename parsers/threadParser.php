@@ -113,6 +113,9 @@ class Thread extends EnhancedObject {
 				$post->title = trim($postTitleSect->childNodes->item(0)->nodeValue);
 				$post->date = trim($postTitleSect->childNodes->item(3)->nodeValue);
 				$post->content = innerXML($postSect->childNodes->item(1)->childNodes->item(0)->childNodes->item(0));
+
+				$post->content = '<p>'.preg_replace('@<br />\s*<br />@', '</p><p>', $post->content).'</p>';
+
 				// $post->content = current($postSect->childNodes->item(1)->xpath("//span[@class='normalTextSmall']"))->nodeValue;
 
 				$post->titleIsOriginal = $post->title != $lastPost->title && $post->title != "Re: ".$lastPost->title;
