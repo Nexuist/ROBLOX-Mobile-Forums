@@ -41,3 +41,8 @@
 	margin-bottom: 8px;
 	overflow: visible;
 }
+
+.post img.mod-icon {
+	display: inline-block;
+	vertical-align: middle;
+}
