@@ -2,7 +2,7 @@
 			<li data-role='list-divider'><?= $post->title ?></li>
 			<? endif ?>
 			<li data-theme='d' class="post" data-role="none">
-				<div>
+				<div class="post-wrapper"><!-- needed to stop this getting mobilified -->
 					<div class="post-info">
 						<a data-role="none" class="author-avatar"  href="#author-<?= $post->author->name ?>">
 							<img
@@ -11,7 +11,7 @@
 								alt='<?= $post->author->name ?>' />
 						</a>
 					<?php if($post->author->isMod): ?>
-							<img src='includes/mod.gif' alt='MOD' />
+						<img src='includes/mod.gif' alt='MOD' class="mod-icon" />
 					<?php endif ?>
 						<a href="#author-<?= $post->author->name ?>"><?= $post->author->name ?></a>
 					<?php if($post->author->online): ?>
