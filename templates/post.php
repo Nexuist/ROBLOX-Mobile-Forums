@@ -2,7 +2,7 @@
 			<li data-role='list-divider'><?= $post->title ?></li>
 			<? endif ?>
 			<li data-theme='d' class="post" data-role="none">
-				<div>
+				<div class="post-wrapper"><!-- needed to stop this getting mobilified -->
 					<!--<div data-content-theme="b" data-theme="c" data-role='collapsible' data-iconpos='right' data-mini='true'>
 						<h5>
 				<?php if($post->author->isMod): ?>
