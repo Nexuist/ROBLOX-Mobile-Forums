@@ -4,6 +4,9 @@
 		<img src = "<?=htmlentities($a->img)?>" alt = "<?=$a->name?>"/><br>
 		<ul data-role = "listview" data-inset = "true" data-theme = "d">
 			<li><a href = "<?= htmlentities($a->getUrl()) ?>" target = "_blank"><?=$a->name?></a></li>
+	<?php if($a->isMod): ?>
+			<li><img src = "includes/mod.gif" class = "ui-li-icon" alt = "Moderator" />Moderator</li>
+	<?php endif ?>
 			<li>Joined <?= $a->prettifyJoinDate() ?></li>
 			<li><?=$a->postCount?> Posts</li>
 		</ul>
