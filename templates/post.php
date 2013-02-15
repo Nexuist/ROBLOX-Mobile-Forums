@@ -29,10 +29,13 @@
 								src='<?= htmlentities($post->author->smallImg) ?>'
 								alt='<?= $post->author->name ?>' />
 						</a>
+					<?php if($post->author->isMod): ?>
+							<img src='includes/mod.gif' alt='MOD' />
+					<?php endif ?>
 						<a href="#author-<?= $post->author->name ?>"><?= $post->author->name ?></a>
-						<?php if($post->author->online): ?>
+					<?php if($post->author->online): ?>
 						&bull; <span class="author-status">online</span>
-						<?php endif ?>
+					<?php endif ?>
 						<span class="post-date"><?= implode('<br />', $post->wrappedDate) ?></span>
 					</div>
 					<div class="post-content">
