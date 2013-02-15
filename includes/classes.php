@@ -52,6 +52,17 @@ class User extends EnhancedObject {
 	public function getSmallImg() {
 		return "http://www.roblox.com/Thumbs/Avatar.ashx?x=48&y=48&Format=Png&username=" . $this->name;
 	}
+	/**
+	 * Used to prettify the ugly join date
+	 * Makes it a bit more easier to read
+	 */
+	public function prettifyJoinDate() {
+		$month = substr($this->joinDate,2,5);
+		$day = substr($this->joinDate,0,2);
+		$year = substr($this->joinDate,6);
+		$joinDate = $month . " " . $day . "," . $year;
+		return $joinDate;
+	}
 
 	/**
 	 * Private constructor to create a user with a given name
