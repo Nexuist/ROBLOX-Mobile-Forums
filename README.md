@@ -1,7 +1,7 @@
-ROBLOXMobileForums
-==================
+<p>ROBLOX Mobile Forums</p>
+<hr />
 
-Files for ROBLOX Mobile Forums.
+<p>Files for ROBLOX Mobile Forums. (Inactive)</p>
 
-[Stable site](http://deplex.tk/projects/demos/mobileforums/)  
+[Stable site](http://deplex.tk/projects/demos/mobileforums/)
 [Development site](http://deplex.tk/projects/tests/mobileforums/)
