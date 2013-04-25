@@ -3,5 +3,5 @@
 
 <p>Files for ROBLOX Mobile Forums. (Inactive)</p>
 
-[Stable site](http://deplex.tk/projects/demos/mobileforums/)
-[Development site](http://deplex.tk/projects/tests/mobileforums/)
+<a href="http://deplex.tk/projects/demos/mobileforums/">Stable site</a>
+<a href="http://deplex.tk/projects/tests/mobileforums/">Development site</a> 
