@@ -1,0 +1,48 @@
+.post.ui-li-static.ui-li {
+	padding: 8px;
+	padding-bottom: 0px;
+}
+.post .post-wrapper {
+	overflow: hidden;
+}
+.post .post-info {
+	font-weight: normal;
+	font-size: 80%;
+	color: #808080;
+	padding-bottom: 8px;
+}
+.post .post-info .author-avatar {
+	display: block;
+	float: left;
+	margin-right: 8px;
+	padding-bottom: 8px;
+}
+.post .post-info .author-avatar img{
+	display: block;
+}
+.post .post-info .author-name {
+	display: inline-block;
+	padding-left: 4px;
+}
+.post .post-info .author-status {
+	color: green;
+	font-weight: normal;
+}
+.post .post-info .post-date {
+	display: block;
+	float: right;
+	font-size: 80%;
+	text-align: right;
+}
+
+.post .post-content p {
+	word-break: break-all;
+	margin: 0;
+	margin-bottom: 8px;
+	overflow: visible;
+}
+
+.post img.mod-icon {
+	display: inline-block;
+	vertical-align: middle;
+}
