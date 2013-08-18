@@ -2,6 +2,7 @@
 //  OpenShift sample Node application
 var express = require('express');
 var fs      = require('fs');
+var redis   = require('redis');
 
 
 /**
@@ -22,16 +23,24 @@ var SampleApp = function() {
      */
     self.setupVariables = function() {
         //  Set the environment variables we need.
-        self.ipaddress = process.env.OPENSHIFT_NODEJS_IP ||
-                         process.env.OPENSHIFT_INTERNAL_IP;
-        self.port      = process.env.OPENSHIFT_NODEJS_PORT   ||
-                         process.env.OPENSHIFT_INTERNAL_PORT || 8080;
+        self.sockets = {
+            main: {
+                host: process.env.OPENSHIFT_NODEJS_IP ||
+                      process.env.OPENSHIFT_INTERNAL_IP,
+                port: process.env.OPENSHIFT_NODEJS_PORT   ||
+                      process.env.OPENSHIFT_INTERNAL_PORT || 8080
+            },
+            redis: {
+                host: process.env.OPENSHIFT_REDIS_HOST,
+                port: process.env.OPENSHIFT_REDIS_PORT
+            }
+        }
 
-        if (typeof self.ipaddress === "undefined") {
+        if (typeof self.sockets.main.host === "undefined") {
             //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
             //  allows us to run/test the app locally.
             console.warn('No OPENSHIFT_*_IP var, using 127.0.0.1');
-            self.ipaddress = "127.0.0.1";
+            self.sockets.main.host = "127.0.0.1";
         };
     };
 
@@ -68,6 +77,7 @@ var SampleApp = function() {
            process.exit(1);
         }
         console.log('%s: Node server stopped.', Date(Date.now()) );
+        self.redisClient.end();
     };
 
 
@@ -126,6 +136,28 @@ var SampleApp = function() {
         };
     };
 
+    self.connectToDb = function(next) {
+        self.redisClient = redis.createClient(self.sockets.redis.port, self.sockets.redis.host)
+        self.redisClient.on("error", function (err) {
+            console.log("Redis error " + err);
+        });
+        self.redisClient.auth(process.env.REDIS_PASSWORD, next)
+    }
+
+    self.testDb = function(next) {
+        var testKey = "debugonly:test";
+        var testVal = "string val" + Math.random();
+        console.log("Testing with: " + testVal);
+
+        var client = self.redisClient;
+
+        client.set(testKey, testVal, redis.print);
+        client.get(testKey, function (err, reply) {
+            redis.print(err, reply);
+
+            client.del(testKey, redis.print);
+        });
+    }
 
     /**
      *  Initialize the server (express) and create the routes and register
@@ -152,6 +184,9 @@ var SampleApp = function() {
 
         // Create the express server and routes.
         self.initializeServer();
+        self.connectToDb(function() {
+            self.testDb();
+        });
     };
 
 
@@ -160,9 +195,9 @@ var SampleApp = function() {
      */
     self.start = function() {
         //  Start the app on the specific interface (and port).
-        self.app.listen(self.port, self.ipaddress, function() {
+        self.app.listen(self.sockets.main.port, self.sockets.main.host, function() {
             console.log('%s: Node server started on %s:%d ...',
-                        Date(Date.now() ), self.ipaddress, self.port);
+                        Date(Date.now() ), self.sockets.main.host, self.sockets.main.port);
         });
     };
 

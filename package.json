@@ -1,31 +1,30 @@
 {
-  "name": "OpenShift-Sample-App",
-  "version": "1.0.0",
-  "description": "OpenShift Sample Application",
+  "name": "roblox-mobile-forums",
+  "version": "0.0.0",
+  "description": "Mobile forum interface",
   "keywords": [
-    "OpenShift",
-    "Node.js",
-    "application",
-    "openshift"
+    "Roblox",
+    "forum",
+    "mobile"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
-    "url":  "http://openshift.redhat.com/"
+    "name": "RobloxLabs",
+    "url":  "https://github.com/RobloxLabs"
   },
-  "homepage": "http://openshift.redhat.com/",
   "repository": {
     "type": "git",
-    "url": "https://gitub.com/openshift/crankcase"
+    "url": "https://github.com/RobloxLabs/ROBLOXMobileForums"
   },
 
   "engines": {
-    "node": ">= 0.6.0",
+    "node": ">= 0.10.0",
     "npm": ">= 1.0.0"
   },
 
   "dependencies": {
-    "express": "*"
+    "express": "*",
+    "hiredis": "*",
+    "redis": "*"
   },
   "devDependencies": {},
   "bundleDependencies": [],
