@@ -134,6 +134,10 @@ var SampleApp = function() {
             res.set('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
+
+        self.routes['/credits'] = function(req, res) {
+            res.render('credits');
+        };
     };
 
     self.connectToDb = function(next) {

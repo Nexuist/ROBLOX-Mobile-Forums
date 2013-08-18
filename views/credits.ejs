@@ -1,0 +1,45 @@
+<% layout('layout') %>
+<% block('title', 'Credits') %>
+<%
+var format = function(array) {
+	array.forEach(function(entry) {
+		%>
+		<li>
+			<a href='http://www.roblox.com/User.aspx?UserName=$name' target = '_blank'>
+				<img src='http://www.roblox.com/Thumbs/Avatar.ashx?x=100&amp;y=100&amp;Format=Png&amp;username=<%= entry.name %>'>
+				<h3><%= entry.name %></h3>
+				<p><%= entry.desc %></p>
+			</a>
+		</li>
+		<%
+	});
+}
+%>
+<ul data-role="listview" data-inset="true">
+	<li data-role="list-divider">
+		<h3>Programmers</h3>
+		<p>These are the people who make the site work like it does.</p>
+	</li>
+	<%
+	format([{
+		name: "Techboy6601",
+		desc: "Techboy is the mastermind behind this project. It was his idea, and he loves working on it."
+	}, {
+		name: "NXTBoy",
+		desc: "As soon as NXTBoy joined, the project blossomed into something wonderful. He's the one who makes this project awesome."
+	}]);
+	%>
+	<li data-role="list-divider">
+		<h3>Designers</h3>
+		<p>And these are the people who make the site look like it does!</p>
+	</li>
+	<%
+	format([{
+		name: "Garnished",
+		desc: "Garnished is an amazing person to work with and he's given us some really good ideas."
+	}, { 
+		name: "testedmarkel62",
+		desc: "The newest addition to our team, testedmarkel has offered some of his time to help us with graphics."
+	}]);
+	%>
+</ul>
