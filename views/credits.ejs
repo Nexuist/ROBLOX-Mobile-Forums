@@ -5,7 +5,7 @@ var format = function(array) {
 	array.forEach(function(entry) {
 		%>
 		<li>
-			<a href='http://www.roblox.com/User.aspx?UserName=$name' target = '_blank'>
+			<a href='http://www.roblox.com/User.aspx?UserName=<%= entry.name %>' target = '_blank'>
 				<img src='http://www.roblox.com/Thumbs/Avatar.ashx?x=100&amp;y=100&amp;Format=Png&amp;username=<%= entry.name %>'>
 				<h3><%= entry.name %></h3>
 				<p><%= entry.desc %></p>
