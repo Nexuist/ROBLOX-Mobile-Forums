@@ -171,6 +171,8 @@ var SampleApp = function() {
         self.createRoutes();
         self.app = express();
 
+        self.app.use(express.static('public'));
+
         // Setup templating
         var engine = require('ejs-locals')
         self.app.engine('ejs', engine);
