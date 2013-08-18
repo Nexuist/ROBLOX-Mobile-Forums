@@ -3,6 +3,10 @@
 var express = require('express');
 var fs      = require('fs');
 var redis   = require('redis');
+var request = require('request');
+
+// our includes
+var forumListParser = require('./parsers/forum-list');
 
 
 /**
@@ -137,6 +141,15 @@ var SampleApp = function() {
 
         self.routes['/credits'] = function(req, res) {
             res.render('credits');
+        };
+        self.routes['/forums'] = function(req, res) {
+            request('http://www.roblox.com/Forum/Default.aspx', function(err, response, body) {
+                if (!err && response.statusCode == 200) {
+                    var parsed = forumListParser.parse(body);
+                    res.json(parsed);
+                }
+                else console.log(err, response.statusCode)
+            });
         };
     };
 
