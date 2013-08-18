@@ -1,0 +1,28 @@
+<% layout('layout') %>
+<% block('title', 'All') %>
+<ul data-role="listview">
+	<li>
+		<h1>Welcome</h1>
+		<p>Welcome to the mobile version of the ROBLOX forums! This website was developed
+		by the ROBLOX users
+		<a href="http://www.roblox.com/User.aspx?UserName=techboy6601" target='_blank'>Techboy6601</a>,
+		<a href="http://www.roblox.com/User.aspx?UserName=NXTBoy" target='_blank'>NXTBoy</a>,
+		<a href="http://www.roblox.com/User.aspx?UserName=Garnished" target='_blank'>Garnished</a>, and 
+		<a href="http://www.roblox.com/User.aspx?UserName=testedmarkel62"  target='_blank'>testedmarkel62</a>. Please note
+		that it is still in development and not everything is implemented yet. Enjoy!</p>
+	</li>
+	<% forumGroups.forEach(function(group) { %>
+		<li data-role='list-divider'><%= group.name %></li>
+		<% group.forums.forEach(function(forum) { %>
+			<li>
+				<a href='forums/1337'>
+					<h3><%= forum.name %></h3>
+					<p><%= forum.desc %></p>
+				</a>
+			</li>
+		<% }); %>
+	<% }); %>
+</ul>
+&copy; 2013 Deplex Studios &bull;
+<a href="/credits">Credits</a> &bull;
+<a href="/threads/88375831">Changelog</a>

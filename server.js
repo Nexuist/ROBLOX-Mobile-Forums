@@ -134,19 +134,14 @@ var SampleApp = function() {
                      '  <body>\n<br/>\n' + content + '</body>\n</html>');
         };
 
-        self.routes['/'] = function(req, res) {
-            res.set('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
-        };
-
         self.routes['/credits'] = function(req, res) {
             res.render('credits');
         };
-        self.routes['/forums'] = function(req, res) {
+        self.routes['/'] = function(req, res) {
             request('http://www.roblox.com/Forum/Default.aspx', function(err, response, body) {
                 if (!err && response.statusCode == 200) {
                     var parsed = forumListParser.parse(body);
-                    res.json(parsed);
+                    res.render('index', {forumGroups: parsed});
                 }
                 else console.log(err, response.statusCode)
             });
