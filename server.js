@@ -167,6 +167,13 @@ var SampleApp = function() {
         self.createRoutes();
         self.app = express();
 
+        // Setup templating
+        var engine = require('ejs-locals')
+        self.app.engine('ejs', engine);
+
+        self.app.set('views', __dirname + '/views');
+        self.app.set('view engine', 'ejs');
+
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
