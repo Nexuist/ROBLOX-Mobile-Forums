@@ -22,7 +22,5 @@ _**Note:** redis connections do not currently work, but the rest of the site is 
 2. Get the unofficial windows port of redis from [here](https://github.com/MSOpenTech/redis/blob/2.6/bin/release/), and add the executables to your path
 3. In an empty folder somewhere, run `redis-server`
 4. In the repo directory:
-```bash
-npm install
-npm start
-```
+  * `npm install`
+  * `npm start`
