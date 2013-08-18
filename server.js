@@ -141,7 +141,7 @@ var SampleApp = function() {
         self.redisClient.on("error", function (err) {
             console.log("Redis error " + err);
         });
-        self.redisClient.auth(process.env.REDIS_PASSWORD, next)
+        self.redisClient.auth(process.env.REDIS_PASSWORD, next);
     }
 
     self.testDb = function(next) {
