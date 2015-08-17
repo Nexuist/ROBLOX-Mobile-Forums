@@ -26,7 +26,8 @@
     "ejs": "*",
     "ejs-locals": "*",
     "redis": "*",
-    "cheerio": "*"
+    "cheerio": "*",
+    "request": "*"
   },
   "optionalDependencies": {
     "hiredis": "*"
