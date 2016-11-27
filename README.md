@@ -1,6 +1,6 @@
 ### Introduction
 
-As a pre-teen, one of my favorite games was [ROBLOX](roblox.com). I used to heavily frequent the [Scripters](https://forum.roblox.com/Forum/ShowForum.aspx?ForumID=33) forum and became very close with the community there. One of my pet peeves was that the forum website did not have a mobile version, which made browsing on-the-go fairly difficult and annoying. This is my solution to that problem.
+As a pre-teen, one of my favorite games was [ROBLOX](http://roblox.com). I used to heavily frequent the [Scripters](https://forum.roblox.com/Forum/ShowForum.aspx?ForumID=33) forum and became very close with the community there. One of my pet peeves was that the forum website did not have a mobile version, which made browsing on-the-go fairly difficult and annoying. This is my solution to that problem.
 
 * [Blog post about the project](https://blog-axial.rhcloud.com/roblox-on-the-go/)
 * [Most recent version on GitHub](https://github.com/RobloxLabs/ROBLOX-Mobile-Forums)
